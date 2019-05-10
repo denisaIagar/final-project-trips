@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/welcome}">
+<head>
+    <meta charset="UTF-8">
+    <title>User profile </title>
+
+</head>
+<body>
+<div layout:fragment="continut" class="container">
+        <h2>Users profile</h2>
+        <table class="table table-striped">
+        <form class="form-horizontal" th:action="@{/registration}" th:object="${userForm}"
+              method="post" >
+            <div class="form-group">
+                <label class="control-label col-sm-6" for="firstname">First Name</label>
+                <div class="col-sm-10">
+                    <input class="form-control" id="firstname" type="text" th:field="*{firstname}"/>
+                    <small th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></small>
+                </div>
+            </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="lastname">Last Name</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="lastname" type="text" th:field="*{lastname}"/>
+                        <small th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></small>
+                    </div>
+                </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="username">Username</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" id="username" type="text" th:field="*{username}"/>
+                            <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></small>
+                        </div>
+                    </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="password">Password</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" id="password" type="password" th:field="*{password}"/>
+                                <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
+                            </div>
+                        </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="passwordConfirm">PasswordConfirm</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" id="passwordConfirm" type="password"
+                                           th:field="*{passwordConfirm}"/>
+                                    <small th:if="${#fields.hasErrors('passwordConfirm')}"
+                                           th:errors="*{passwordConfirm}"></small>
+                                    <button class="btn btn-lg btn-primary btn-block" type="showpassword">
+                                        Show password</button>
+                                </div>
+                            </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="city">City</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" id="city" type="text" th:field="*{city}"/>
+                                        <small th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></small>
+                                    </div>
+                                </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2" for="address">Address</label>
+                                        <div class="col-sm-4">
+                                            <input class="form-control" id="address" type="text" th:field="*{address}"/>
+                                            <small th:if="${#fields.hasErrors('address')}"
+                                                   th:errors="*{address}"></small>
+                                        </div>
+                                    </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2" for="phonenumber">Phone Number</label>
+                                            <div class="col-sm-4">
+                                                <input class="form-control" id="phonenumber" type="text"
+                                                       th:field="*{phonenumber}"/>
+                                                <small th:if="${#fields.hasErrors('phonenumber')}"
+                                                       th:errors="*{phonenumber}"></small>
+                                            </div>
+                                        </div>
+
+            <input class="btn btn-default" type="submit">Submit</input>
+            <a th:href="@{/userFrom/registration}"></a>
+        </form>
+        </table>
+</div>
+</div>
+</body>
+</html>

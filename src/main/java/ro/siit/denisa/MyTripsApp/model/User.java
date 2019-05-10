@@ -1,21 +1,61 @@
 package ro.siit.denisa.MyTripsApp.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private String firstName;
-    private String lastName;
+
+    private String firstname;
+
+    @NotBlank
+    private String lastname;
+
+    @NotBlank
+    private String username;
+    @NotBlank
     private String password;
+
     private String city;
     private String address;
-    private int phoneNumber;
+    private int phonenumber;
+    private String passwordConfirm;
+    private Set<Role> roles;
+
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
+    }
+
+    public int getPhonenumber() {
+        return phonenumber;
+    }
+
+    public void setPhonenumber(int phonenumber) {
+        this.phonenumber = phonenumber;
+    }
+
+    @ManyToMany
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn (name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getId() {
         return id;
     }
@@ -24,20 +64,28 @@ public class User {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -64,24 +112,18 @@ public class User {
         this.address = address;
     }
 
-    public int getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(int phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", city='" + city + '\'' +
                 ", address='" + address + '\'' +
-                ", phoneNumber=" + phoneNumber +
+                ", phonenumber=" + phonenumber +
+                ", roles=" + roles +
                 '}';
     }
 }

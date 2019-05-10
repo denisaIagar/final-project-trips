@@ -1,48 +1,60 @@
 package ro.siit.denisa.MyTripsApp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import ro.siit.denisa.MyTripsApp.Validator.UserValidator;
 import ro.siit.denisa.MyTripsApp.model.User;
+import ro.siit.denisa.MyTripsApp.service.SecurityService;
 import ro.siit.denisa.MyTripsApp.service.UserService;
 
-import javax.validation.Valid;
-
-import static ro.siit.denisa.MyTripsApp.service.UserService.*;
-
 @Controller
-@RequestMapping(path = "/profile")
 public class UserController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
-@GetMapping( path = "")
-    public ModelAndView getAllUsers(){
-        ModelAndView mv =new ModelAndView();
-        mv.setViewName("users");
-        mv.addObject("users", userService.getAllUsers());
-        return mv;
+    @Autowired
+    private SecurityService securityService;
+
+    @Autowired
+    private UserValidator userValidator;
+
+//    @GetMapping( path = "/registration")
+//    public ModelAndView registration(){
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("user-profile");
+//        return modelAndView;
+//    }
+    @GetMapping( path = "/registration")
+    public String registration(Model model){
+    model.addAttribute("userForm", new User());
+    return "registration";
     }
 
 
-    @GetMapping(path = "/add")
-    public String showUser(Model model){
-        model.addAttribute("user", new User());
-        return "add-user";
-    }
+    @PostMapping("/registration")
+    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
+      userValidator.validate(userForm, bindingResult);
 
-    @PostMapping(path = "/add")
-    public String saveNewAuthor(@Valid User user, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
-            return "add-user";
+            return "registration";
         }
-        UserService.saveUser(user);
-        return "redirect:/authors";
+
+        userService.save(userForm);
+
+//        securityService.autologin(userForm.getUsername(), getPasswordConfirm());
+
+        return "redirect:/welcome";
     }
+
+
+
 }

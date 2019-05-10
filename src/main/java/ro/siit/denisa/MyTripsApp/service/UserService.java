@@ -1,23 +1,22 @@
 package ro.siit.denisa.MyTripsApp.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import ro.siit.denisa.MyTripsApp.model.RoleRepository;
 import ro.siit.denisa.MyTripsApp.model.User;
 import ro.siit.denisa.MyTripsApp.model.UserRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
 
 @Service
-public class UserService  {
+public interface UserService {
 
-    @Autowired
-    static
+    void save(User user);
 
-    UserRepository userRepository;
+    User findByUsername(String username);
 
-    public Iterable<User> getAllUsers(){
-        return userRepository.findAll();
-    }
-
-    public static User saveUser(User a){
-       return userRepository.save(a);
-    }
 }
+
+
