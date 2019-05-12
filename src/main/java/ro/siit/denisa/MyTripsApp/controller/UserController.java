@@ -15,6 +15,8 @@ import ro.siit.denisa.MyTripsApp.model.User;
 import ro.siit.denisa.MyTripsApp.service.SecurityService;
 import ro.siit.denisa.MyTripsApp.service.UserService;
 
+import javax.validation.Valid;
+
 @Controller
 public class UserController {
 
@@ -27,12 +29,6 @@ public class UserController {
     @Autowired
     private UserValidator userValidator;
 
-//    @GetMapping( path = "/registration")
-//    public ModelAndView registration(){
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("user-profile");
-//        return modelAndView;
-//    }
     @GetMapping( path = "/registration")
     public String registration(Model model){
     model.addAttribute("userForm", new User());
@@ -41,7 +37,7 @@ public class UserController {
 
 
     @PostMapping("/registration")
-    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
+    public String registration(@ModelAttribute("userForm") @Valid User userForm, BindingResult bindingResult) {
       userValidator.validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
@@ -50,7 +46,7 @@ public class UserController {
 
         userService.save(userForm);
 
-//        securityService.autologin(userForm.getUsername(), getPasswordConfirm());
+        securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
 
         return "redirect:/welcome";
     }

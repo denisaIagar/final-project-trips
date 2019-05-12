@@ -1,31 +1,40 @@
 package ro.siit.denisa.MyTripsApp.model;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
 @Table(name = "user")
+@Valid
 public class User {
+//    @Size(message = "eroare")
     private int id;
-
+    @Size(message = "eroare")
     private String firstname;
-
+    @Size(message = "eroare")
     @NotBlank
     private String lastname;
-
+    @Size(message = "eroare")
     @NotBlank
     private String username;
+    @Size(message = "eroare")
     @NotBlank
     private String password;
-
+//    @Size(message = "eroare")
     private String city;
+//    @Size(message = "eroare")
     private String address;
-    private int phonenumber;
+//    @Size(message = "eroare")
+    private Integer phonenumber;
+    @Size(message = "eroare")
     private String passwordConfirm;
     private Set<Role> roles;
 
+    @Transient
     public String getPasswordConfirm() {
         return passwordConfirm;
     }
@@ -34,11 +43,11 @@ public class User {
         this.passwordConfirm = passwordConfirm;
     }
 
-    public int getPhonenumber() {
+    public Integer getPhonenumber() {
         return phonenumber;
     }
 
-    public void setPhonenumber(int phonenumber) {
+    public void setPhonenumber(Integer phonenumber) {
         this.phonenumber = phonenumber;
     }
 
