@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/welcome}">
+
 <head>
     <meta charset="UTF-8">
     <title>Trips </title>
@@ -10,12 +11,33 @@
 
 <body>
 <div layout:fragment="main" class="container">
+<div class="row">
+    <div class="col-md-8 btn-group dropdown">
+        <button type="button" class="btn btn-default">Dropdown</button>
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+            <span class="caret"></span>
+            <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu">
+            <li>First trip</li>
+            <li>Second trip</li>
+            <li>Third trip</li>
+        </ul>
+    </div>
 
-<form action="/upload" method="post" enctype="multipart/form-data">
-    <input type="file" name="files" multiple>
-    <input type="submit" value="Upload Files">
-</form>
+    <div class="col-md-4">
+        <button type="button" class="btn btn-info" style="margin-right:10px;">ADD</button>
+        <button type="button" class="btn btn-danger">Delete</button>
+    </div>
 
+<div>
+<!--<form th:action="@{/add-trip-photo(${_csrf.parameterName}=${_csrf.token})}" method="post" enctype="multipart/form-data">-->
+    <!--<input type="file" name="files" multiple>-->
+    <!--<input type="submit" value="Upload Files">-->
+<!--</form>-->
+</div>
+</div>
 
 
 </div>

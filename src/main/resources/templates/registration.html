@@ -11,16 +11,16 @@
     </script>
     <style type="text/css">
 	body {
-		color: #fff;
-		background: #19aa8d;
-		font-family: 'Roboto', sans-serif;
-	}
-	.form-control, .form-control:focus, .input-group-addon {
-		border-color: #e1e1e1;
-	}
-    .form-control, .btn {
-        border-radius: 3px;
-    }
+		<!--color: #fff;-->
+		<!--background: #19aa8d;-->
+		<!--font-family: 'Roboto', sans-serif;-->
+	<!--}-->
+	<!--.form-control, .form-control:focus, .input-group-addon {-->
+		<!--border-color: #e1e1e1;-->
+	<!--}-->
+    <!--.form-control, .btn {-->
+        <!--border-radius: 3px;-->
+    <!--}-->
 	.signup-form {
 		width: 390px;
 		margin: 0 auto;
@@ -98,6 +98,10 @@
 		font-size: 7px;
 		position: absolute;
 	}
+
+
+
+
 </style>
 
 </head>
@@ -109,82 +113,77 @@
 
             <h2>Users profile</h2>
             <div class="form-group">
-                <!--<div class="input-group">-->
-                    <!--<span class="input-group-addon"><i class="fa fa-user"></i></span>-->
-                    <!--<input type="text" class="form-control" id="firstname" name="username" placeholder="Username" required="required"-->
-                           <!--th:field="*{firstname}">-->
-                 <!---->
-                <!--</div>-->
-                <!--<div class="form-group">-->
-                    <!--<div class="input-group">-->
-                        <!--<span class="input-group-addon"><i class="fa fa-lock"></i></span>-->
-                        <!--<input type="text" class="form-control" name="password" placeholder="Password" required="required"-->
-                        <!--th:field="*{password}" >-->
-                    <!--</div>-->
+
                 <label class="control-label col-sm-2" for="firstname">First Name</label>
-                <div class="col-sm-4">
+                <div class="col-sm-10">
                     <input class="form-control" id="firstname" type="text" th:field="*{firstname}"/>
-                    <!--<small th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></small>-->
+                    <small th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></small>
                 </div>
             </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="lastname">Last Name</label>
-                    <div class="col-sm-4">
+                    <div class="col-sm-10">
                         <input class="form-control" id="lastname" type="text" th:field="*{lastname}"/>
-                        <!--<small th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></small>-->
+                        <small th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></small>
                     </div>
                 </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="username">Username</label>
-                        <div class="col-sm-4">
+                        <div class="col-sm-10">
                             <input class="form-control" id="username" type="text" th:field="*{username}"/>
-                            <!--<small th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></small>-->
+                            <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></small>
                         </div>
                     </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="password">Password</label>
-                            <div class="col-sm-4">
-                                <input class="form-control" placeholder="Password" id="password" type="password"
+                            <div class="col-sm-10">
+                                <input class="form-control"  id="password" type="password"
                                        th:field="*{password}" data-toggle="password"/>
-                                <!--<small th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>-->
+                                <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
                             </div>
                         </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="passwordConfirm">PasswordConfirm</label>
-                                <div class="col-sm-4">
-                                    <input class="form-control" placeholder="PasswordConfirm" id="passwordConfirm" type="password"
+                                <div class="col-sm-10">
+                                    <input class="form-control"  id="passwordConfirm" type="password"
                                            th:field="*{passwordConfirm}" data-toggle="password"/>
-                                    <!--<small th:if="${#fields.hasErrors('passwordConfirm')}"-->
-                                           <!--th:errors="*{passwordConfirm}"></small>-->
+                                    <small th:if="${#fields.hasErrors('passwordConfirm')}"
+                                           th:errors="*{passwordConfirm}"></small>
 
                                 </div>
                             </div>
                                 <div class="form-group">
                                     <label class="control-label col-sm-2" for="city">City</label>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-10">
                                         <input class="form-control" id="city" type="text" th:field="*{city}"/>
-                                        <!--<small th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></small>-->
+                                        <small th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></small>
                                     </div>
                                 </div>
                                     <div class="form-group">
                                         <label class="control-label col-sm-2" for="address">Address</label>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-10">
                                             <input class="form-control" id="address" type="text" th:field="*{address}"/>
-                                            <!--<small th:if="${#fields.hasErrors('address')}"-->
-                                                   <!--th:errors="*{address}"></small>-->
+                                            <small th:if="${#fields.hasErrors('address')}"
+                                                   th:errors="*{address}"></small>
                                         </div>
                                     </div>
                                         <div class="form-group">
                                             <label class="control-label col-sm-2" for="phonenumber">Phone Number</label>
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-10">
                                                 <input class="form-control" id="phonenumber" type="text"
                                                        th:field="*{phonenumber}"/>
-                                                <!--<small th:if="${#fields.hasErrors('phonenumber')}"-->
-                                                       <!--th:errors="*{phonenumber}"></small>-->
+                                                <small th:if="${#fields.hasErrors('phonenumber')}"
+                                                       th:errors="*{phonenumber}"></small>
                                             </div>
                                         </div>
-            <input class="btn btn-default" type="submit"/>
-            <a th:href="@{/userFrom/trips}"></a>
+            <!--<input class="btn btn-default" type="submit"/>-->
+            <!--<a th:href="@{/userFrom/trips}"></a>-->
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
+            </div>
+        </form>
+    <div class="text-center">Already have an account? <a th:href="@{/userFrom/trips}">Login here</a></div>
         </form>
 
 </div>

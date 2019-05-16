@@ -13,7 +13,7 @@ import ro.siit.denisa.MyTripsApp.model.Trips;
 import java.io.File;
 
 @SpringBootApplication
-//@ComponentScan({"ro.siit.denisa.MyTripsApp", "controller"})
+@ComponentScan({"ro.siit.denisa.MyTripsApp"})
 public class MyTripsAppApplication extends SpringBootServletInitializer {
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {

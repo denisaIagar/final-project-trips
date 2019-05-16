@@ -2,5 +2,6 @@ package ro.siit.denisa.MyTripsApp.model;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-//public interface TripsRepository extends JpaRepository <Trips, String>{
-//}
+public interface TripsRepository extends JpaRepository <Trips, String>{
+    Trips findByTripName( String tripname);
+}

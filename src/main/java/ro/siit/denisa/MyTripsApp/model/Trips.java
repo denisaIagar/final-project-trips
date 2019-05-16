@@ -1,13 +1,57 @@
 package ro.siit.denisa.MyTripsApp.model;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "trip")
 public class Trips {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer tripId;
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+    @JoinColumn(name ="user_id", nullable = false)
+    private User user;
     private String tripname;
     private LocalDate dateFrom;
     private LocalDate dateTo;
+    private String photo1;
+    private String photo2;
     private String impression;
     private String location;
+
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getPhoto1() {
+        return photo1;
+    }
+
+    public void setPhoto1(String photo1) {
+        this.photo1 = photo1;
+    }
+
+    public String getPhoto2() {
+        return photo2;
+    }
+
+    public void setPhoto2(String photo2) {
+        this.photo2 = photo2;
+    }
+
+    public Integer getTripId() {
+        return tripId;
+    }
+
+    public void setTripId(Integer tripId) {
+        this.tripId = tripId;
+    }
 
     public String getLocation() {
         return location;

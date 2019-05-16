@@ -22,9 +22,6 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
-//    public Iterable<User> getAllUsers() {
-//        return userRepository.findAll();
-//    }
 
     @Override
     public void save(User user) {

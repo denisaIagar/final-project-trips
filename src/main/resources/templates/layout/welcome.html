@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Welcome</title>
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
 
@@ -33,18 +34,43 @@
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Login <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">Profile</a></li>
-                    <li class="dropdown">
+            <!--<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">-->
+                <!--<ul class="nav navbar-nav">-->
+                    <!--<li class="active"><a href="#">Login <span class="sr-only">(current)</span></a></li>-->
 
-                    </li>
-                </ul>
+                    <!--<li><a href="#">Profile</a></li>-->
+                    <!--<li class="dropdown">-->
+
+                    <!--</li>-->
+                <!--</ul>-->
+
+
+
+                <div sec:authorize="!isAuthenticated()">
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="/login">Login</a></li>
+                            <li><a href="/registration">Register</a></li>
+                            <li class="dropdown"></li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div>
+
+                <div sec:authorize="isAuthenticated()">
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="/welcome" th:utext="${username}"></a>></li>
+                            <li><a href="/add-trip-photo">Add a new trip</a></li>
+                            <li><a href="/logout">Logout</a></li>
+                            <li class="dropdown"></li>
+                        </ul>
+                    </div>
+
+                    <!--</div>&lt;!&ndash; /.navbar-collapse &ndash;&gt;-->
+                </div>
                 <form class="navbar-form navbar-right">
                 </form>
-
-            </div><!-- /.navbar-collapse -->
+            <!--</div>&lt;!&ndash; /.navbar-collapse &ndash;&gt;-->
         </div><!-- /.container-fluid -->
     </nav>
     </div>

@@ -11,11 +11,9 @@ import java.util.Set;
 @Table(name = "user")
 @Valid
 public class User {
-//    @Size(message = "eroare")
+
     private int id;
-    @Size(message = "eroare")
     private String firstname;
-    @Size(message = "eroare")
     @NotBlank
     private String lastname;
     @Size(message = "eroare")
@@ -24,12 +22,9 @@ public class User {
     @Size(message = "eroare")
     @NotBlank
     private String password;
-//    @Size(message = "eroare")
     private String city;
-//    @Size(message = "eroare")
     private String address;
-//    @Size(message = "eroare")
-    private Integer phonenumber;
+    private int phonenumber;
     @Size(message = "eroare")
     private String passwordConfirm;
     private Set<Role> roles;
@@ -43,11 +38,11 @@ public class User {
         this.passwordConfirm = passwordConfirm;
     }
 
-    public Integer getPhonenumber() {
+    public int getPhonenumber() {
         return phonenumber;
     }
 
-    public void setPhonenumber(Integer phonenumber) {
+    public void setPhonenumber(int phonenumber) {
         this.phonenumber = phonenumber;
     }
 
