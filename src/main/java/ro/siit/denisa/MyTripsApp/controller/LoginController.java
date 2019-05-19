@@ -41,10 +41,10 @@ public class LoginController {
         return "login";
     }
 
-    @GetMapping({"/", "/trips"})
-    public String welcome(Model model) {
-        return "trips";
-    }
+//    @GetMapping({"/", "/trips"})
+//    public String welcome(Model model) {
+//        return "trips";
+//    }
 
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)

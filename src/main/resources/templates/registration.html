@@ -3,44 +3,62 @@
       layout:decorate="~{layout/welcome}">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <title>User profile </title>
 
-    <script
-            type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-show-password/1.0.3/bootstrap-show-password.min.js">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-show-password/1.0.3/bootstrap-show-password.min.js">
+    </script>
+    <script>
+        function showPassword() {
+         var password = document.getElementById("password");
+
+         if (password.type === "password") {
+             password.type = "text";
+         } else {
+            password.type = "password";
+         }
+        }
     </script>
     <style type="text/css">
 	body {
-		<!--color: #fff;-->
-		<!--background: #19aa8d;-->
-		<!--font-family: 'Roboto', sans-serif;-->
-	<!--}-->
-	<!--.form-control, .form-control:focus, .input-group-addon {-->
-		<!--border-color: #e1e1e1;-->
-	<!--}-->
-    <!--.form-control, .btn {-->
-        <!--border-radius: 3px;-->
-    <!--}-->
+		color: #999;
+		background: #f5f5f5;
+		font-family: 'Roboto', sans-serif;
+	}
+	.form-control, .form-control:focus, .input-group-addon {
+		border-color: #e1e1e1;
+        border-radius: 0;
+	}
 	.signup-form {
-		width: 390px;
+		width: 600px;
 		margin: 0 auto;
 		padding: 30px 0;
+		display: table;
+	}
+	.signup-form h2 {
+		color: #636363;
+        margin: 0 0 15px;
+		text-align:;
+    }
+    .signup-form .lead {
+        font-size: 14px;
+		margin-bottom: 30px;
+		text-align: center;
 	}
     .signup-form form {
-		color: #999;
-		border-radius: 3px;
+		border-radius: 1px;
     	margin-bottom: 15px;
         background: #fff;
+		border: 1px solid #f3f3f3;
         box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
         padding: 30px;
-    }
-	.signup-form h2 {
-		color: #333;
-		font-weight: bold;
-        margin-top: 0;
-    }
-    .signup-form hr {
-        margin: 0 -30px 20px;
+        width: 600px;
     }
 	.signup-form .form-group {
 		margin-bottom: 20px;
@@ -50,58 +68,61 @@
 		font-size: 13px;
 	}
 	.signup-form .form-control {
-		min-height: 38px;
+		min-height: 40px;
 		box-shadow: none !important;
+		border-width: 0 0 1px 0;
 	}
 	.signup-form .input-group-addon {
 		max-width: 42px;
 		text-align: center;
+		background: none;
+		border-width: 0 0 1px 0;
+		padding-left: 5px;
 	}
-	.signup-form input[type="checkbox"] {
-		margin-top: 2px;
-	}
-    .signup-form .btn{
+       .signup-form .btn {
         font-size: 16px;
         font-weight: bold;
-		background: #19aa8d;
+		<!--background: #19aa8d;-->
+        border-radius: 3px;
 		border: none;
 		min-width: 140px;
+        outline: none !important;
+
     }
 	.signup-form .btn:hover, .signup-form .btn:focus {
 		background: #179b81;
-        outline: none;
 	}
+
 	.signup-form a {
-		color: #fff;
-		text-decoration: underline;
-	}
-	.signup-form a:hover {
-		text-decoration: none;
-	}
-	.signup-form form a {
 		color: #19aa8d;
 		text-decoration: none;
 	}
-	.signup-form form a:hover {
+	.signup-form a:hover {
 		text-decoration: underline;
 	}
 	.signup-form .fa {
 		font-size: 21px;
 	}
-	.signup-form .fa-paper-plane {
-		font-size: 18px;
-	}
 	.signup-form .fa-check {
 		color: #fff;
-		left: 17px;
+		left: 9px;
 		top: 18px;
 		font-size: 7px;
 		position: absolute;
 	}
+	.signup-form .fa fa-home {
+		font-size: 17px;
+	}
+	.signup-form .fa fa-address-card {
+		font-size: 17px;
+	}
+	.signup-form .fa fa-phone {
+		font-size: 17px;
+	}
 
-
-
-
+	.input-group {
+	    width: 500px;
+	 }
 </style>
 
 </head>
@@ -111,85 +132,95 @@
         <form class="form-horizontal" th:action="@{/registration}" th:object="${userForm}"
               method="post" >
 
-            <h2>Users profile</h2>
-            <div class="form-group">
-
-                <label class="control-label col-sm-2" for="firstname">First Name</label>
-                <div class="col-sm-10">
-                    <input class="form-control" id="firstname" type="text" th:field="*{firstname}"/>
-                    <small th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></small>
-                </div>
-            </div>
+            <h2>Create new profile</h2>
+            <div class="signup-form">
+             <div class="container">
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="lastname">Last Name</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" id="lastname" type="text" th:field="*{lastname}"/>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        <input class="form-control"  id="firstname" type="text" th:field="*{firstname}"
+                               name="Firstname" placeholder="First Name" required="required">
+                        <small th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        <input class="form-control"  id="lastname" type="text" th:field="*{lastname}"
+                               name="Lastname" placeholder="Last Name" required="required">
                         <small th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></small>
                     </div>
                 </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-2" for="username">Username</label>
-                        <div class="col-sm-10">
-                            <input class="form-control" id="username" type="text" th:field="*{username}"/>
-                            <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></small>
-                        </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        <input class="form-control"  id="username" type="text" th:field="*{username}"
+                               name="Username" placeholder="User Name" required="required">
+                        <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></small>
                     </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="password">Password</label>
-                            <div class="col-sm-10">
-                                <input class="form-control"  id="password" type="password"
-                                       th:field="*{password}" data-toggle="password"/>
-                                <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
-                            </div>
-                        </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="passwordConfirm">PasswordConfirm</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control"  id="passwordConfirm" type="password"
-                                           th:field="*{passwordConfirm}" data-toggle="password"/>
-                                    <small th:if="${#fields.hasErrors('passwordConfirm')}"
-                                           th:errors="*{passwordConfirm}"></small>
+                </div>
 
-                                </div>
-                            </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-2" for="city">City</label>
-                                    <div class="col-sm-10">
-                                        <input class="form-control" id="city" type="text" th:field="*{city}"/>
-                                        <small th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></small>
-                                    </div>
-                                </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-2" for="address">Address</label>
-                                        <div class="col-sm-10">
-                                            <input class="form-control" id="address" type="text" th:field="*{address}"/>
-                                            <small th:if="${#fields.hasErrors('address')}"
-                                                   th:errors="*{address}"></small>
-                                        </div>
-                                    </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-sm-2" for="phonenumber">Phone Number</label>
-                                            <div class="col-sm-10">
-                                                <input class="form-control" id="phonenumber" type="text"
-                                                       th:field="*{phonenumber}"/>
-                                                <small th:if="${#fields.hasErrors('phonenumber')}"
-                                                       th:errors="*{phonenumber}"></small>
-                                            </div>
-                                        </div>
-            <!--<input class="btn btn-default" type="submit"/>-->
-            <!--<a th:href="@{/userFrom/trips}"></a>-->
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                        <input  class="form-control" name="password" placeholder="Password" required="required"
+                                id="password" type="password"
+                                th:field="*{password}" data-toggle="password"/>
+                        <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
+                    </div>
+                </div>
 
-            <div class="form-group">
+                <div class="form-group">
+                    <div class="input-group">
+				<span class="input-group-addon">
+					<i class="fa fa-lock"></i>
+					<i class="fa fa-check"></i>
+				</span>
+                       <input class="form-control" name="passwordConfirm" placeholder="Confirm Password"
+                              id="passwordConfirm" type="password"  th:field="*{passwordConfirm}" data-toggle="password"
+                              required="required"/>
+                        <small th:if="${#fields.hasErrors('passwordConfirm')}"
+                               th:errors="*{passwordConfirm}"></small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-home"></i></span>
+                        <input type="text" class="form-control" name="city" placeholder="City"
+                              id="city" th:field="*{city}" required="required">
+                        <small th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-address-card"></i></span>
+                        <input type="text" class="form-control" name="address" placeholder="Address"
+                              id="address" th:field="*{address}" required="required">
+                        <small th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                        <input type="text" class="form-control" name="phonenumber" placeholder="Phone Number"
+                              id="phonenumber" th:field="*{phonenumber}" required="required">
+                        <small th:if="${#fields.hasErrors('phonenumber')}" th:errors="*{phonenumber}"></small>
+                    </div>
+                </div>
+
+            <div>
                 <button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
+                <button th:action="@{/login}" class="btn btn-danger btn-lg">Login</button>
             </div>
-        </form>
-    <div class="text-center">Already have an account? <a th:href="@{/userFrom/trips}">Login here</a></div>
-        </form>
+            </div>
+            </div>
 
+        </form>
 </div>
-
-<script type="text/javascript">
-   $("#password").password('toggle');
-</script>
 </body>
 </html>

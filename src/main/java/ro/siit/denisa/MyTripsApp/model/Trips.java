@@ -1,5 +1,7 @@
 package ro.siit.denisa.MyTripsApp.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -8,12 +10,14 @@ import java.time.LocalDate;
 public class Trips {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer tripId;
+    private int tripId;
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name ="user_id", nullable = false)
     private User user;
     private String tripname;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateFrom;
+    @DateTimeFormat( pattern = "yyyy-MM-dd")
     private LocalDate dateTo;
     private String photo1;
     private String photo2;
@@ -45,11 +49,11 @@ public class Trips {
         this.photo2 = photo2;
     }
 
-    public Integer getTripId() {
+    public int getTripId() {
         return tripId;
     }
 
-    public void setTripId(Integer tripId) {
+    public void setTripId(int tripId) {
         this.tripId = tripId;
     }
 

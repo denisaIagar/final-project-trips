@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ro.siit.denisa.MyTripsApp.controller.TripsController;
 import ro.siit.denisa.MyTripsApp.model.Trips;
+import ro.siit.denisa.MyTripsApp.service.TripsServiceImpl;
 
 import java.io.File;
 
@@ -22,7 +23,7 @@ public class MyTripsAppApplication extends SpringBootServletInitializer {
 	}
 
 	public static void main(String[] args) {
-		new File(TripsController.uploadingDir).mkdir();
+		new File(TripsServiceImpl.uploadingDir).mkdir();
 		SpringApplication.run(MyTripsAppApplication.class, args);
 	}
 

@@ -3,15 +3,25 @@
       layout:decorate="~{layout/welcome}">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
     <title>Log in </title>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style type="text/css">
 
+</style>
 </head>
+
 <body>
     <div layout:fragment="main" class="container">
             <h2>Log In</h2>
 
-            <form class="form-signup" method="post" th:action="@{/login}" >
+            <form class="" method="post" th:action="@{/login}" >
 
                 <div class="form-group" >
                     <label class="control-label col-md-4" for="username">User name</label>
@@ -25,15 +35,13 @@
                     <input type="password" class="form-control" id="password" name="password">
                     </div>
                 </div>
-                <div class="col-md-10">
-                <button th:action="@{/login}" style="margin-right:60px;">Login</button>
+                <div class="align-self-md-center">
+                    <button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
+                    <button th:action="@{/login}" class="btn btn-danger btn-lg">Login</button>
                 </div>
             </form>
 
         </div>
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     </div>
 </body>
 </html>
