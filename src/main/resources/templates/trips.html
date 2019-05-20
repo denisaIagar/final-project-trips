@@ -5,7 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Trips </title>
-
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 
 
@@ -14,45 +16,60 @@
     <form th:action="@{/trips}" th:object="${tr}" method="GET">
         <div class="form-group">
             <label for="tripx">Trip</label>
-            <select class="form-control" id="tripx" name="tripx" onchange="this.form.submit()">
+            <select class="form-control" style="width:50%" id="tripx" name="tripx" onchange="this.form.submit()">
                 <option th:value="${tr.tripId}" th:text="${tr.tripname}"></option>
                 <option
                         th:each="tripx: ${trips}"
                         th:value="${tripx.tripId}"
                         th:text="${tripx.tripname}">
                 </option>
+                <div>
+                <input type="button" class="btn btn-info" value="Add"/>
+                <input type="submit" class="btn btn-danger" value="Delete">
+                </div>
             </select>
+        </div>
+        <div class="form-group">
+            <label for="impression">Impression</label>
+            <textarea class="form-control" rows="3" id="impression" th:text="${tr.impression}" readonly>
+               </textarea>
+        </div>
+        <figure class="snip1139">
+            <blockquote>Sometimes I think the surest sign that intelligent life exists elsewhere in the universe is that none of it has tried to contact us.
+                <div class="captation"></div>
+            </blockquote>
+            <img th:src="@{${'/uploadingDir/' + tr.photoFirst1}}" alt="firstPhoto"/>
 
-
-            <div class="col-md-4">
-                <form th:action="@{/add-trips}" method="post">
-                    <input type="hidden" name="id" th:value="${trip.id}"/>
-                    <input type="button" class="btn btn-info" value="Add"/>
-                </form>
-                <button type="button" class="btn btn-info" style="margin-right:10px;">ADD</button>
-                <form th:action="@{/trips/delete}" method="post">
-                    <input type="hidden" name="id" th:value="${trip.id}" />
-                    <input type="submit" class="btn btn-danger" value="Delete">
-                </form>
-                <button type="button" class="btn btn-danger">Delete</button>
+            <div class="author">
+                <h5>Pelican Steve <span>- LittleThemes</span></h5>
             </div>
+        </figure>
 
-            <div>
-                <form th:action="@{/add-trip-photo(${_csrf.parameterName}=${_csrf.token})}" method="post" enctype="multipart/form-data">
-                    <input type="file" name="files" multiple>
-                    <input type="submit" value="Upload Files">
-                </form>
-            </div>
-        </div>
     </form>
-        </div>
-        </div>
-    </form>
-
-
-
-
-
 </div>
 </body>
 </html>
+<!--<div class="col-md-4">-->
+<!--<form th:action="@{/add-trips}" method="post">-->
+<!--<input type="hidden" name="id" th:value="${trip.id}"/>-->
+<!--<input type="button" class="btn btn-info" value="Add"/>-->
+<!--</form>-->
+<!--<button type="button" class="btn btn-info" style="margin-right:10px;">ADD</button>-->
+<!--<form th:action="@{/trips/delete}" method="post">-->
+<!--<input type="hidden" name="id" th:value="${trip.id}" />-->
+<!--<input type="submit" class="btn btn-danger" value="Delete">-->
+<!--</form>-->
+<!--<button type="button" class="btn btn-danger">Delete</button>-->
+<!--</div>-->
+
+<!--<div>-->
+<!--<form th:action="@{/add-trip-photo(${_csrf.parameterName}=${_csrf.token})}" method="post" enctype="multipart/form-data">-->
+<!--<input type="file" name="files" multiple>-->
+<!--<input type="submit" value="Upload Files">-->
+<!--</form>-->
+<!--</div>-->
+<!--</div>-->
+<!--</form>-->
+<!--</div>-->
+<!--</div>-->
+<!--</form>-->

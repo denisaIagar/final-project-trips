@@ -23,6 +23,13 @@ public class Trips {
     private String photo2;
     private String impression;
     private String location;
+    private String description1;
+    private String description2;
+    private String title1;
+    private String title2;
+
+
+
 
 
     public User getUser() {
@@ -95,5 +102,37 @@ public class Trips {
 
     public void setImpression(String impression) {
         this.impression = impression;
+    }
+
+    public String getDescription1() {
+        return description1;
+    }
+
+    public void setDescription1(String description1) {
+        this.description1 = description1;
+    }
+
+    public String getDescription2() {
+        return description2;
+    }
+
+    public void setDescription2(String description2) {
+        this.description2 = description2;
+    }
+
+    public String getTitle1() {
+        return title1;
+    }
+
+    public void setTitle1(String title1) {
+        this.title1 = title1;
+    }
+
+    public String getTitle2() {
+        return title2;
+    }
+
+    public void setTitle2(String title2) {
+        this.title2 = title2;
     }
 }
