@@ -19,7 +19,6 @@ import java.nio.file.Paths;
 import java.util.List;
 
 
-
 @Service
 public class TripsServiceImpl implements TripsService {
 
@@ -56,7 +55,7 @@ public class TripsServiceImpl implements TripsService {
      }
 
     @Override
-    public List<Trips> findTripsByUserId(int userId) {
+    public List<Trips> findTripsByUserId(int tripId, int userId) {
         return tripsRepository.findTripsByUserId(userId);
     }
 
@@ -66,8 +65,17 @@ public class TripsServiceImpl implements TripsService {
         return null;
     }
 
-
-    public void deteleByTripId(Integer id){
-       tripsRepository.deleteById(id);
+    @Override
+    public Trips deleteTrip(Trips trips) {
+        tripsRepository.delete(trips);
+        return trips;
     }
+
+    @Override
+    public Trips findTripByUserId(int tripId, int userId) {
+        tripsRepository.findTripsByUserId(userId);
+        return null;
+    }
+
+
 }

@@ -18,12 +18,10 @@ import ro.siit.denisa.MyTripsApp.service.UserService;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -97,7 +95,7 @@ public class TripsController {
     @GetMapping("/trips")
     public ModelAndView showTrips(@RequestParam(value = "tripx",required = false) Integer tripId) {
         User user = userService.findByUsername(securityService.findLoggedInUsername());
-        List<Trips> userTrips = tripsService.findTripsByUserId(user.getId());
+        List<Trips> userTrips = tripsService.findTripsByUserId(tripId, user.getId());
 
         if (userTrips.isEmpty())
             return new ModelAndView("redirect:/add-trips");
@@ -128,4 +126,16 @@ public class TripsController {
 //    }
 
 
-}
+//    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+//   public String deleteTrip(@RequestParam(name= "id") int tripId) {
+////        User user = userService.findByUsername(securityService.findLoggedInUsername());
+////        List<Trips> userTrips = tripsService.findTripsByUserId(tripId, user.getId());
+//        Trips trips = tripsService.findTripsByUserId(tripId,
+//                userService.findByUsername(securityService.findLoggedInUsername()).getId());
+//
+//
+//        tripsService.deleteTrip(trips);
+//        return "redirect:/trips";
+//   }
+    }
+

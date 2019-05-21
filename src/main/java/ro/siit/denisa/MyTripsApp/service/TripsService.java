@@ -10,7 +10,12 @@ public interface TripsService {
 
     Trips findByTripname(String tripname);
 
-    List<Trips> findTripsByUserId(int userId);
+    List<Trips> findTripsByUserId(int tripId, int userId);
 
     Trips findByTripId(int tripId);
+
+    Trips deleteTrip(Trips trips);
+
+    Trips findTripByUserId(int tripId, int userId);
+
 }
