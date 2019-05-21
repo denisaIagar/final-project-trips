@@ -11,13 +11,13 @@ public class Trips {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int tripId;
-    @ManyToOne(fetch = FetchType.LAZY,optional = false)
-    @JoinColumn(name ="user_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
     private String tripname;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateFrom;
-    @DateTimeFormat( pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateTo;
     private String photo1;
     private String photo2;
@@ -27,10 +27,15 @@ public class Trips {
     private String description2;
     private String title1;
     private String title2;
+    private boolean deleteT = false;
 
+    public boolean isDeleteT() {
+        return deleteT;
+    }
 
-
-
+    public void setDeleteT() {
+        this.deleteT = true;
+    }
 
     public User getUser() {
         return user;
@@ -135,4 +140,8 @@ public class Trips {
     public void setTitle2(String title2) {
         this.title2 = title2;
     }
+
+//    public void setDeleteT() {
+//        return;
+//    }
 }

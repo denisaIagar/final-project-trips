@@ -1,6 +1,8 @@
 package ro.siit.denisa.MyTripsApp.controller;
 
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,9 +16,13 @@ import ro.siit.denisa.MyTripsApp.service.TripsService;
 import ro.siit.denisa.MyTripsApp.service.TripsServiceImpl;
 import ro.siit.denisa.MyTripsApp.service.UserService;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -76,6 +82,17 @@ public class TripsController {
         return "redirect:/trips";
     }
 
+    @RequestMapping(value = "/photos/{photoName}", method = RequestMethod.GET)
+    public void getImageAsByteArray(HttpServletResponse response, @PathVariable String photoName) throws IOException {
+        Path fileNameAndPath = Paths.get(TripsServiceImpl.uploadingDir, photoName);
+        InputStream in = new FileInputStream(new File(fileNameAndPath.toUri()));
+//                servletContext.getResourceAsStream("/WEB-INF/images/image-example.jpg");
+        response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+        IOUtils.copy(in, response.getOutputStream());
+    }
+
+
+
 
     @GetMapping("/trips")
     public ModelAndView showTrips(@RequestParam(value = "tripx",required = false) Integer tripId) {
@@ -101,8 +118,14 @@ public class TripsController {
     }
 
 
-
-
+//    @PostMapping("/delete")
+//    public String deleteTrip(@RequestParam(name= "id", required = false) int tripId){
+//        Trips deleteByIdTrip= tripsService.findByTripId(tripId);
+//        deleteByIdTrip.setDeleteT();
+//        tripsService.saveTrips(deleteByIdTrip);
+//
+//            return "redirect:/trips";
+//    }
 
 
 }

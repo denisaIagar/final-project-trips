@@ -1,13 +1,18 @@
 package ro.siit.denisa.MyTripsApp.service;
 
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 import ro.siit.denisa.MyTripsApp.model.Trips;
 import ro.siit.denisa.MyTripsApp.model.TripsRepository;
 
-import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -42,14 +47,27 @@ public class TripsServiceImpl implements TripsService {
                 Files.write(fileNameAndPath, files.getBytes());
         }
 
-
+     public void returnPhoto(HttpServletResponse response, @PathVariable String photoName) throws Exception{
+         Path fileNameAndPath = Paths.get(TripsServiceImpl.uploadingDir, photoName);
+         InputStream in = new FileInputStream(new File(fileNameAndPath.toUri()));
+//                servletContext.getResourceAsStream("/WEB-INF/images/image-example.jpg");
+         response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+         IOUtils.copy(in, response.getOutputStream());
+     }
 
     @Override
     public List<Trips> findTripsByUserId(int userId) {
         return tripsRepository.findTripsByUserId(userId);
     }
 
-    public void removeTripById(Integer id){
+    @Override
+    public Trips findByTripId(int tripId) {
+        tripsRepository.findById(tripId);
+        return null;
+    }
+
+
+    public void deteleByTripId(Integer id){
        tripsRepository.deleteById(id);
     }
 }

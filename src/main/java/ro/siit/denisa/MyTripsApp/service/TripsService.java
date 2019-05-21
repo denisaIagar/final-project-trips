@@ -1,8 +1,6 @@
 package ro.siit.denisa.MyTripsApp.service;
 
-import org.springframework.web.multipart.MultipartFile;
 import ro.siit.denisa.MyTripsApp.model.Trips;
-import ro.siit.denisa.MyTripsApp.model.User;
 
 import java.util.List;
 
@@ -14,4 +12,5 @@ public interface TripsService {
 
     List<Trips> findTripsByUserId(int userId);
 
+    Trips findByTripId(int tripId);
 }
