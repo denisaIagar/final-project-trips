@@ -59,19 +59,16 @@
                 <div sec:authorize="isAuthenticated()">
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="/welcome" th:text="${username}"></a></li>
+                            <li><a href="/trips"></a></li>
                             <li><a href="/add-trips">Add a new trip</a></li>
                             <li><a href="/logout">Logout</a></li>
                             <li class="dropdown"></li>
                         </ul>
                     </div>
-
-                    <!--</div>&lt;!&ndash; /.navbar-collapse &ndash;&gt;-->
                 </div>
                 <form class="navbar-form navbar-right">
                 </form>
-            <!--</div>&lt;!&ndash; /.navbar-collapse &ndash;&gt;-->
-        </div><!-- /.container-fluid -->
+        </div>
     </nav>
     </div>
 
