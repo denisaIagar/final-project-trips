@@ -22,6 +22,11 @@ public class LoginServiceImpl implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * this method check if username is a regular user or an admin
+     * @param username
+     * @return
+     */
 
     @Override
     @Transactional(readOnly = true)

@@ -10,12 +10,17 @@ public interface TripsService {
 
     Trips findByTripname(String tripname);
 
-    List<Trips> findTripsByUserId(int tripId, int userId);
+    List<Trips> findTripsByUserId(int userId);
 
     Trips findByTripId(int tripId);
 
-    Trips deleteTrip(Trips trips);
+   void deleteByTripId(Integer id);
 
-    Trips findTripByUserId(int tripId, int userId);
+   void deleteImg(String fileName);
+
+   Trips findByTripIdAndUserId(int tripId, int userId);
+   void delete(Trips trips);
+
+
 
 }

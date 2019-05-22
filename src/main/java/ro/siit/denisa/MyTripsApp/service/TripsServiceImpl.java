@@ -1,23 +1,20 @@
 package ro.siit.denisa.MyTripsApp.service;
 
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 import ro.siit.denisa.MyTripsApp.model.Trips;
 import ro.siit.denisa.MyTripsApp.model.TripsRepository;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.IOException;
+import java.nio.file.*;
 import java.util.List;
 
+/**
+ * provide service for register a trip
+ *
+ * @author Iagar Denisa
+ */
 
 @Service
 public class TripsServiceImpl implements TripsService {
@@ -37,8 +34,11 @@ public class TripsServiceImpl implements TripsService {
         return tripsRepository.findByTripname(tripname);
     }
 
-    public static final String uploadingDir = System.getProperty("user.dir") + "/uploadingDir";
+    /**
+     * addPhoto method is saves the uploaded photos from browser
+     */
 
+    public static final String uploadingDir = System.getProperty("user.dir") + "/uploadingDir";
     public void addPhoto( MultipartFile files) throws Exception{
         StringBuilder fileNames = new StringBuilder();
             Path fileNameAndPath = Paths.get(uploadingDir, files.getOriginalFilename());
@@ -46,16 +46,9 @@ public class TripsServiceImpl implements TripsService {
                 Files.write(fileNameAndPath, files.getBytes());
         }
 
-     public void returnPhoto(HttpServletResponse response, @PathVariable String photoName) throws Exception{
-         Path fileNameAndPath = Paths.get(TripsServiceImpl.uploadingDir, photoName);
-         InputStream in = new FileInputStream(new File(fileNameAndPath.toUri()));
-//                servletContext.getResourceAsStream("/WEB-INF/images/image-example.jpg");
-         response.setContentType(MediaType.IMAGE_JPEG_VALUE);
-         IOUtils.copy(in, response.getOutputStream());
-     }
 
     @Override
-    public List<Trips> findTripsByUserId(int tripId, int userId) {
+    public List<Trips> findTripsByUserId(int userId) {
         return tripsRepository.findTripsByUserId(userId);
     }
 
@@ -66,16 +59,38 @@ public class TripsServiceImpl implements TripsService {
     }
 
     @Override
-    public Trips deleteTrip(Trips trips) {
-        tripsRepository.delete(trips);
-        return trips;
+    public void deleteByTripId(Integer id) {
+        tripsRepository.deleteById(id);
     }
 
     @Override
-    public Trips findTripByUserId(int tripId, int userId) {
-        tripsRepository.findTripsByUserId(userId);
-        return null;
+    public void deleteImg(String fileName) {
+        try{
+            Files.deleteIfExists(Paths.get(uploadingDir, fileName));
+        }catch (NoSuchFileException e){
+            System.out.println("No such file/directory");
+        }catch (DirectoryNotEmptyException e){
+            System.out.println("Empty directory");
+        }catch (IOException e){
+            System.out.println("Invalid permissions.");
+        }
     }
+
+  @Override
+    public Trips findByTripIdAndUserId(int tripId, int userId) {
+       return  tripsRepository.findByTripIdAndUserId(tripId, userId);
+
+    }
+
+    @Override
+    public void delete(Trips trips) {
+        tripsRepository.delete(trips);
+    }
+
+//    @Override
+//    public void findByTripIdAndUserId(int tripId, int userId) {
+//        tripsRepository.
+//    }
 
 
 }

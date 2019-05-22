@@ -10,6 +10,12 @@ import ro.siit.denisa.MyTripsApp.model.UserRepository;
 import javax.management.relation.Role;
 import java.util.HashSet;
 
+/**
+ * provide service for register a user
+ *
+ * @author Iagar Denisa
+ */
+
 @Service
 public class UserServiceImpl implements UserService {
 

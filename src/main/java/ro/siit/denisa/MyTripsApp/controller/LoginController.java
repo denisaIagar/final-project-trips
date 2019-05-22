@@ -17,6 +17,11 @@ import ro.siit.denisa.MyTripsApp.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * @author Iagar Denisa
+ * the Login controller class recive request and and prepare the model for the View to present
+ */
+
 @Controller
 public class LoginController {
 
@@ -30,6 +35,15 @@ public class LoginController {
     private UserValidator userValidator;
 
 
+    /**
+     * the login method validates if the credentials for user name and password are correct
+     * if password and user name don`t match an error message will be display
+     * @param model
+     * @param error
+     * @param logout
+     * @return
+     */
+
     @GetMapping("/login")
     public String login( Model model,String error,String logout) {
         if (error != null)
@@ -41,11 +55,13 @@ public class LoginController {
         return "login";
     }
 
-//    @GetMapping({"/", "/trips"})
-//    public String welcome(Model model) {
-//        return "trips";
-//    }
 
+    /**
+     * this method use authentication and security for the logout request
+     * @param request
+     * @param response
+     * @return redirect to login page
+     */
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logoutPage(HttpServletRequest request, HttpServletResponse response){

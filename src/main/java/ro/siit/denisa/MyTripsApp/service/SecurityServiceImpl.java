@@ -26,17 +26,11 @@ public class SecurityServiceImpl implements SecurityService {
     private static final Logger logger = LoggerFactory.getLogger(SecurityServiceImpl.class);
 
 
-
-
-//    @Override
-//    public String findLoggedInUsername() {
-//        Object userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
-//        if (userDetails instanceof UserDetails) {
-//            return ((UserDetails) userDetails).getUsername();
-//        }
-//        return null;
-//    }
-
+    /**
+     * findLoggedInUsername method checks if the username is authenticated
+     *
+     * @return
+     */
     @Override
     public String findLoggedInUsername() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -47,6 +41,12 @@ public class SecurityServiceImpl implements SecurityService {
 
         return null;
     }
+
+    /**
+     * the method check if username and password are matching in database
+     * @param username
+     * @param password
+     */
 
     @Override
     public void autologin(String username, String password) {

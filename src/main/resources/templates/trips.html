@@ -69,9 +69,6 @@
         .thumbnail img {
             width: 100%;
         }
-
-
-
 </style>
 
 
@@ -81,95 +78,81 @@
 
         <form th:action="@{/trips}" th:object="${tr}" method="GET">
             <h2>My trips</h2>
-            <div class="display inline-block">
-                <div class="form-group">
-                    <label for="tripx">Trip name</label>
-                    <select class="form-control" style="width:50%" id="tripx" name="tripx"
-                            onchange="this.form.submit()">
-                        <option th:value="${tr.tripId}" th:text="${tr.tripname}"></option>
-                        <option
-                                th:each="tripx: ${trips}"
-                                th:value="${tripx.tripId}"
-                                th:text="${tripx.tripname}">
-                        </option>
-                    </select>
-                </div>
-                <div>
-                    <a href="/add-trips" class="btn btn-primary btn-lg">Add</a>
-                </div>
-                <div class="form-group">
-                    <form th:action="@{/delete}" method="Post">
-                        <input type="hidden" name="id" th:value="${tr.tripId}">
-                        <input type="submit" class="btn-primary " value="Delete"/>
-                    </form>
-                </div>
+
+            <div class="form-group">
+                <label for="tripx">Trip name</label>
+                <select class="form-control" style="width:50%" id="tripx" name="tripx"
+                        onchange="this.form.submit()">
+                    <option th:value="${tr.tripId}" th:text="${tr.tripname}"></option>
+                    <option
+                            th:each="tripx: ${trips}"
+                            th:value="${tripx.tripId}"
+                            th:text="${tripx.tripname}">
+                    </option>
+                </select>
             </div>
 
             <div class="form-group">
                 <label for="impression">Impression</label>
-
                 <textarea class="form-control" rows="3" id="impression" th:text="${tr.impression}" readonly>
                </textarea>
-
             </div>
-            <label class="form-group">Photos
-                <div class="form-group">
-                    <div class="col-xs-24 col-sm-8 col-md-4">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
                         <div class="thumbnail">
-                            <img th:src="@{${'/photos/' + tr.photo1}}" alt="Card One" class="card-img-top"/>
+                            <img class="img-thumbnail" th:src="@{${'/photos/' + tr.photo1}}" alt="Thumbnail image"
+                                 height="600px" width="600px"/>
                             <div class="caption">
                                 <h5 th:text="${tr.title1}"></h5>
                                 <p th:text="${tr.description1}"></p>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-xs-24 col-sm-8 col-md-4">
+                    <div class="col-md-4">
                         <div class="thumbnail">
-                            <img th:src="@{${'/photos/' + tr.photo2}}" alt="Card One" class="card-img-top"/>
+                            <img class="img-thumbnail" th:src="@{${'/photos/' + tr.photo2}}" alt="Thumbnail image"
+                                 height="600px" width="600px"/>
                             <div class="caption">
                                 <h5 th:text="${tr.title2}"></h5>
                                 <p th:text="${tr.description2}"></p>
                             </div>
                         </div>
                     </div>
-                </div>
-            </label>
-            <div class="col-xs-24 col-sm-8 col-md-4">
-                <div class="form-group">
-                    <label for="dates">Dates</label>
-                    <textarea class="form-control" style="resize: none; text-align: center;" rows="1" id="dates"
-                              th:text="${#temporals.format(tr.dateFrom, 'dd/MM/yyyy')} + ' - ' +
+                    <div class="col-md-4">
+                        <label for="dates">Dates</label>
+                        <textarea class="form-control" style="resize: none; text-align: center;" rows="1" id="dates"
+                                  th:text="${#temporals.format(tr.dateFrom, 'dd/MM/yyyy')} + ' - ' +
                                            ${#temporals.format(tr.dateTo, 'dd/MM/yyyy')}" readonly>
                         </textarea>
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <textarea class="form-control" id="location" rows="1" type="text"
+                                      th:text="*{location}"></textarea>
+                            <small th:if="${#fields.hasErrors('location')}" th:errors="*{location}"></small>
+                        </div>
+                        <span class="d-sm-inline-block">
+                    <a href="/add-trips" class="btn btn-primary btn-lg">Add</a>
+                </span>
+                    </div>
                 </div>
             </div>
-
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="location">Location</label>
-                    <input class="form-control" id="location" type="text" th:text="*{location}"/>
-                    <small th:if="${#fields.hasErrors('location')}" th:errors="*{location}"></small>
-                </div>
-            </div>
-
         </form>
+
+        <div class="inline-block">
+
+            <label class="label control-label">
+                <form th:action="@{/delete}" method="Post">
+                    <input type="hidden" name="id" th:value="${tr.tripId}">
+                    <input type="submit" class="btn-primary btn-lg" value="Delete"/>
+                </form>
+            </label>
+        </div>
     </div>
 </div>
+
 </body>
 </html>
-<!--<div class="col-md-4">-->
-<!--<form th:action="@{/add-trips}" method="post">-->
-<!--<input type="hidden" name="id" th:value="${trip.id}"/>-->
-<!--<input type="button" class="btn btn-info" value="Add"/>-->
-<!--</form>-->
-<!--<button type="button" class="btn btn-info" style="margin-right:10px;">ADD</button>-->
-<!--<form th:action="@{/trips/delete}" method="post">-->
-<!--<input type="hidden" name="id" th:value="${trip.id}" />-->
-<!--<input type="submit" class="btn btn-danger" value="Delete">-->
-<!--</form>-->
-<!--<button type="button" class="btn btn-danger">Delete</button>-->
-<!--</div>-->
+
 

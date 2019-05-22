@@ -27,15 +27,6 @@ public class Trips {
     private String description2;
     private String title1;
     private String title2;
-    private boolean deleteT = false;
-
-    public boolean isDeleteT() {
-        return deleteT;
-    }
-
-    public void setDeleteT() {
-        this.deleteT = true;
-    }
 
     public User getUser() {
         return user;
@@ -141,7 +132,4 @@ public class Trips {
         this.title2 = title2;
     }
 
-//    public void setDeleteT() {
-//        return;
-//    }
 }

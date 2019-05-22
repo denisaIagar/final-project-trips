@@ -35,6 +35,13 @@ public class UserController {
     return "registration";
     }
 
+    /**
+     * this method is saving all the user who want to create an account
+     *
+     * @param userForm
+     * @param bindingResult
+     * @return
+     */
 
     @PostMapping("/registration")
     public String registration(@ModelAttribute("userForm") @Valid User userForm, BindingResult bindingResult) {

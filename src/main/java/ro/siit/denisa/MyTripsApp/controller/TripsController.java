@@ -24,7 +24,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Trips Controller handel the request for Trips page
+ * @author Iagar Denisa
+ *
+ */
+
 
 @Controller
 public class TripsController {
@@ -42,7 +50,6 @@ public class TripsController {
     TripsServiceImpl tripsServiceimpl;
 
 
-
 //    @RequestMapping("trips")
 //    public String tripsUpload(Model model) {
 //        model.addAttribute("trip", new Trips());
@@ -55,14 +62,23 @@ public class TripsController {
         return "add-trips";
     }
 
+    /**
+     * this method save the details about  the current trip
+     *
+     * @param photoFirst
+     * @param photoSecond
+     * @param trip
+     * @param bindingResult
+     * @return
+     */
+
     @PostMapping("/add-trips")
     public String addTrips(@RequestParam("photoFirst1") MultipartFile photoFirst,
-                          @RequestParam("photoSecond2") MultipartFile photoSecond,
-                          @ModelAttribute("trip") @Valid Trips trip, BindingResult bindingResult) {
+                           @RequestParam("photoSecond2") MultipartFile photoSecond,
+                           @ModelAttribute("trip") @Valid Trips trip, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "add-trips";
         }
-
         try {
             tripsServiceimpl.addPhoto(photoFirst);
             tripsServiceimpl.addPhoto(photoSecond);
@@ -72,7 +88,6 @@ public class TripsController {
         }
 
         trip.setUser(userService.findByUsername(securityService.findLoggedInUsername()));
-
         trip.setPhoto1(photoFirst.getOriginalFilename());
         trip.setPhoto2(photoSecond.getOriginalFilename());
         tripsService.saveTrips(trip);
@@ -80,22 +95,33 @@ public class TripsController {
         return "redirect:/trips";
     }
 
+
+    /**
+     * this method convert the received from the browser into a byteArray
+     *
+     * @param response
+     * @param photoName
+     * @throws IOException
+     */
     @RequestMapping(value = "/photos/{photoName}", method = RequestMethod.GET)
     public void getImageAsByteArray(HttpServletResponse response, @PathVariable String photoName) throws IOException {
         Path fileNameAndPath = Paths.get(TripsServiceImpl.uploadingDir, photoName);
         InputStream in = new FileInputStream(new File(fileNameAndPath.toUri()));
-//                servletContext.getResourceAsStream("/WEB-INF/images/image-example.jpg");
         response.setContentType(MediaType.IMAGE_JPEG_VALUE);
         IOUtils.copy(in, response.getOutputStream());
     }
 
-
-
+    /**
+     * this method is displaying all trips added by the current  user
+     *
+     * @param tripId
+     * @return
+     */
 
     @GetMapping("/trips")
-    public ModelAndView showTrips(@RequestParam(value = "tripx",required = false) Integer tripId) {
+    public ModelAndView showTrips(@RequestParam(value = "tripx", required = false) Integer tripId) {
         User user = userService.findByUsername(securityService.findLoggedInUsername());
-        List<Trips> userTrips = tripsService.findTripsByUserId(tripId, user.getId());
+        List<Trips> userTrips = tripsService.findTripsByUserId(user.getId());
 
         if (userTrips.isEmpty())
             return new ModelAndView("redirect:/add-trips");
@@ -103,39 +129,34 @@ public class TripsController {
         ModelAndView mv = new ModelAndView("trips");
         mv.addObject("trips", userTrips);
 
-        if(tripId == null){
-            mv.addObject("tr",userTrips.get(0));
-        }else {
+        if (tripId == null) {
+            mv.addObject("tr", userTrips.get(0));
+        } else {
             Trips selectedTrip = new Trips();
-            for(Trips t: userTrips)
-                if(t.getTripId()== tripId)
+            for (Trips t : userTrips)
+                if (t.getTripId() == tripId)
                     selectedTrip = t;
-                mv.addObject("tr",selectedTrip);
+            mv.addObject("tr", selectedTrip);
         }
         return mv;
     }
 
+    /**
+     * removeTrip method deletes trips base on tripId
+     * @param tripId
+     * @return
+     */
 
-//    @PostMapping("/delete")
-//    public String deleteTrip(@RequestParam(name= "id", required = false) int tripId){
-//        Trips deleteByIdTrip= tripsService.findByTripId(tripId);
-//        deleteByIdTrip.setDeleteT();
-//        tripsService.saveTrips(deleteByIdTrip);
-//
-//            return "redirect:/trips";
-//    }
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public String deleteTrip(@RequestParam(name = "id", required = false) Integer tripId) {
+        Trips trips = tripsService.findByTripIdAndUserId(tripId,
+                userService.findByUsername(securityService.findLoggedInUsername()).getId());
+        tripsService.deleteImg(trips.getPhoto1());
+        tripsService.deleteImg(trips.getPhoto2());
+        tripsService.delete(trips);
 
-
-//    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-//   public String deleteTrip(@RequestParam(name= "id") int tripId) {
-////        User user = userService.findByUsername(securityService.findLoggedInUsername());
-////        List<Trips> userTrips = tripsService.findTripsByUserId(tripId, user.getId());
-//        Trips trips = tripsService.findTripsByUserId(tripId,
-//                userService.findByUsername(securityService.findLoggedInUsername()).getId());
-//
-//
-//        tripsService.deleteTrip(trips);
-//        return "redirect:/trips";
-//   }
+        return "redirect:/trips";
     }
+}
+
 
