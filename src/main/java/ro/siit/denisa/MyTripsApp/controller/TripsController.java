@@ -50,11 +50,6 @@ public class TripsController {
     TripsServiceImpl tripsServiceimpl;
 
 
-//    @RequestMapping("trips")
-//    public String tripsUpload(Model model) {
-//        model.addAttribute("trip", new Trips());
-//        return "trips";
-//    }
 
     @GetMapping("add-trips")
     public String tripsAdd(Model model) {
@@ -115,7 +110,6 @@ public class TripsController {
      * this method is displaying all trips added by the current  user
      *
      * @param tripId
-     * @return
      */
 
     @GetMapping("/trips")
