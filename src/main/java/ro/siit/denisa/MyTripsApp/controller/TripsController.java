@@ -151,6 +151,18 @@ public class TripsController {
 
         return "redirect:/trips";
     }
+
+    @GetMapping ("/editTrip/{id}")
+    public ModelAndView showTrip(@PathVariable("id") int tripId){
+    ModelAndView modelAndView = new ModelAndView("editTrip");
+    Trips tripToEdit = tripsService.findByTripId(tripId);
+    modelAndView.addObject("trip", tripToEdit);
+    return modelAndView;
+
+    }
+
+
+
 }
 
 
